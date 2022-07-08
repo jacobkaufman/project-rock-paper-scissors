@@ -31,21 +31,27 @@ function playRound(playerSelection, computerSelection) {
         return `Tie! You both picked ${playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1)}!`
     }
     else if (playerSelection === "rock" && computerSelection === "paper") {
+        computerScore++
         return "You lose! Paper beats Rock!"
     }
     else if (playerSelection === "rock" && computerSelection === "scissors") {
+        playerScore++
         return "You win! Rock beats Scissors!"
     }
     else if (playerSelection === "paper" && computerSelection === "rock") {
+        playerScore++
         return "You win! Paper beats Rock!"
     }
     else if (playerSelection === "paper" && computerSelection === "scissors") {
+        computerScore++
         return "You lose! Scissors bests Paper!"
     }
     else if (playerSelection === "scissors" && computerSelection === "rock") {
+        computerScore++
         return "You lose! Rock beats Scissors"
     }
     else if (playerSelection === "scissors" && computerSelection === "paper") {
+        playerScore++
         return "You win! Scissors beats Paper!"
     }
     else {
@@ -53,8 +59,25 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-let playerSelection = prompt("Rock, paper or scissors?");
-playerSelection = playerSelection.toLowerCase();
-const computerSelection = computerPlay();
+// Write a NEW function called game(). Call the playRound function inside of this one to play a 5 round game that keeps score and reports a winner or loser at the end
 
-console.log(playRound(playerSelection, computerSelection));
+function game() {
+    for (let i = 0; i < 5; i++) {
+        let playerSelection = prompt("Rock, paper or scissors?");
+        playerSelection = playerSelection.toLowerCase();
+        let computerSelection = computerPlay();
+        console.log(playRound(playerSelection, computerSelection));
+    }
+    if (playerScore > computerScore) {
+        console.log(`You win! With a score of: ${playerScore} to ${computerScore}!` );
+    }
+    else {
+        console.log(`You lose! With a score of: ${playerScore} to ${computerScore}`);
+    }
+}
+
+let playerScore = 0;
+let computerScore = 0;
+
+console.log(game());
+console.log(playerScore);
